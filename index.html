@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0b132b;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background 0.6s ease-in-out;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-sub-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center p-4 text-white relative">
+
+    <div class="w-full max-w-4xl glass-panel rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[85vh] max-h-[600px]">
+        
+        <div class="bg-black/30 px-4 py-2.5 flex items-center justify-between text-xs border-b border-white/5">
+            <div class="flex items-center gap-3 text-white/40">
+                <i class="fa-solid fa-house"></i>
+                <i class="fa-solid fa-rotate-right cursor-pointer hover:text-white" onclick="window.location.reload()"></i>
+                <div class="bg-black/30 px-3 py-1 rounded-full text-white/50 text-[10px]">localhost:3000</div>
+            </div>
+            <div class="text-white/50 font-medium">Weather App</div>
+        </div>
+
+        <div class="p-6 flex-1 flex flex-col justify-between relative overflow-y-auto">
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-between items-center z-10">
+                <div class="relative w-full sm:w-80">
+                    <input type="text" id="city-input" placeholder="Search city name..." class="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-4 pr-10 outline-none text-sm placeholder-white/40 focus:border-white/30 focus:bg-white/15 transition">
+                    <button id="search-btn" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <button id="geo-btn" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full px-4 py-2 text-xs transition font-medium" title="Get Current Location">
+                    <i class="fa-solid fa-location-crosshairs text-sky-400"></i> My Location
+                </button>
+            </div>
+
+            <div id="error-box" class="hidden bg-red-500/20 border border-red-500/30 text-red-200 text-center py-2 rounded-xl my-2 z-10 text-xs">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Incorrect city name! Please try again.
+            </div>
+
+            <div id="weather-info" class="grid grid-cols-1 md:grid-cols-2 gap-8 my-auto z-10">
+                
+                <div class="flex flex-col justify-center items-center md:items-start text-center md:text-left">
+                    <h1 id="city-name" class="text-4xl font-bold tracking-wide text-white">Loading Location...</h1>
+                    
+                    <div class="flex items-center gap-6 mt-4 justify-center md:justify-start">
+                        <div id="weather-icon" class="text-7xl flex items-center justify-center filter drop-shadow-md">
+                            <i class="fa-solid fa-circle-notch fa-spin text-white/30"></i>
+                        </div>
+                        <span id="temperature" class="text-7xl font-extralight tracking-tighter">--°C</span>
+                    </div>
+                    
+                    <p id="weather-desc" class="text-xl text-white/70 mt-3 font-medium capitalize tracking-wide">--</p>
+                </div>
+
+                <div class="flex flex-col justify-center items-center md:items-end gap-4">
+                    <div class="glass-sub-card rounded-2xl p-5 w-full max-w-[300px] flex flex-col gap-4 text-sm shadow-xl">
+                        
+                        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                            <span class="text-white/50 font-light flex items-center gap-2">
+                                <i class="fa-solid fa-droplet text-sky-400 w-4 text-center"></i> Humidity
+                            </span>
+                            <span id="humidity" class="font-semibold text-white">--%</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-white/50 font-light flex items-center gap-2">
+                                <i class="fa-solid fa-cloud-sun text-amber-400 w-4 text-center"></i> Condition
+                            </span>
+                            <span id="condition-status" class="font-semibold text-white/90">--</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-[10px] text-white/20 tracking-widest uppercase z-10">
+                Live Weather Platform
+            </div>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
